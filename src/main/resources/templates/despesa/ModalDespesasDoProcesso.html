@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:cmp="http://www.advocacia.com.br">
+
+	<!-- MODAL DESPESAS -->
+	<div id="modal1" class="card white modal" th:fragment="modalDespesa">
+		<!--<form th:action="#" class="card no-margin" th:method="POST" data:url="@{/despesas}">-->
+			<cmp:titulo texto="Despesa" />	
+			
+			<div class="card-content row modal-content">
+				<div class="input-field col s12 m12 l12 validate">
+					<label for="descricao">Descrição</label>
+					<input id="descricao" type="text" />
+				</div>
+				
+				<div class="input-field col s12 m6 l6 validate">
+					<label for="qtde">Qtde</label>
+					<input id="qtde" type="text" />
+				</div>
+				
+				<div class="input-field col s12 m6 l6 validate">
+					<label for="valor">Valor (R$)</label>
+					<input id="valor" type="text" />
+				</div>
+			</div>
+			
+			<div class="modal-footer">
+		      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+		      <a href="#!" id="btnAdicionarDespesa" class="modal-action modal-close waves-effect waves-green btn-flat red white-text">Adicionar</a>
+		    </div>
+	    <!--</form>-->
+	</div>
+</html>

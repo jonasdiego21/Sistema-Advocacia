@@ -1,0 +1,1 @@
+INSERT INTO usuario (codigo, nome, email, senha, ativo, codigo_grupo) VALUES (1, 'ADMINISTRADOR', 'admin', '$2a$10$pk1xKTJsN0amyiMwDcGSnOmjettiPORWHhYCoI2QdZxVf2wsffoIG', 1, 1);

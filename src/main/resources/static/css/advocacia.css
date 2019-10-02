@@ -1,0 +1,180 @@
+/********** UTILITARIOS *********/
+/* Dashboard */
+.dashboard-card {
+	border-bottom: 5px solid rgba(0, 0, 0, 0.87);
+	cursor:pointer;
+}
+
+.ae-label::before {
+	content: "*";
+	color: red;
+	padding-right: 2px;
+}
+
+/* páginas de erros */
+.pg-erros {
+	margin-top: 20% !important;
+}
+
+/*  tabs */
+.tabs .indicator {
+    position: absolute;
+    bottom: 0px;
+    height: 2px;
+    background-color: #444 !important;
+    will-change: left, right;
+}
+
+.tabs {
+	margin-bottom: 15px !important;
+}
+
+.tabs .tab a {
+	color: #444 !important;
+}
+
+/* Alerts */
+.success {
+    padding: 20px;
+    color: #4CAF50;
+    margin-bottom: 15px;
+    background-color: #ddffdd;
+    border-left: 6px solid #4CAF50;
+}
+
+.error {
+    padding: 20px;
+    color: #f44336;
+    margin-bottom: 15px;
+    background-color: #ffdddd;
+    border-left: 6px solid #f44336;
+}
+
+.msg-error-login {
+    border-bottom: 1px solid #ff0000 !important;
+    color: red;
+}
+
+.msg-login-button {
+	position: relative;
+	margin: 0 10px; 
+	right: 0;
+}
+
+.msg-login-button {
+	cursor: pointer;
+}
+
+/* Login */
+.login-card {
+	background: #fff;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+	width: 350px !important;
+	height: auto !important;
+	padding: 20px;
+	margin: 0px auto !important;
+	position: relative;
+}
+
+.login-card input[type=submit] {
+	width: 100% !important;
+}
+
+.login-card button {
+	width: 100% !important;
+}
+
+.login-card a {
+	color: grey;
+}
+
+.login-card a:hover {
+	color: grey;
+	text-decoration: underline;
+}
+
+/* componente upload */
+.upload {
+	padding: 15px;
+	border: 1px dashed #ddd;
+	border-radius: 45px;
+	background: #fafafa;
+	text-align: center;
+}
+
+.upload-form-file {
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 5px;
+}
+
+.upload-form-file > input[type=file] {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	width: 100%;
+	opacity: 0;
+	cursor: pointer;
+	font-size: 500px;
+}
+
+/* Datepicker */
+.uk-dropdown,
+.uk-dropdown-blank {
+	background-color: #fff;
+	border: 1px solid #ccc;
+	box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
+	/* 1 */
+	display: none;
+	/* 2 */
+	position: absolute;
+	z-index: 1020;
+	/* 3 */
+	box-sizing: border-box;
+	/* 4 */
+	width: 250px;
+	padding: 2px;
+}
+
+/* funcoes do template */
+#ir-topo {
+	background-color: rgba(255, 255, 255, 0.3);
+	position: absolute;
+	width: 50px;
+	height: 50px;
+	margin: 2px;
+	padding: 2px;
+}
+
+#topo {
+	transition: 1s;
+}
+
+#ir-topo ~ #topo:active {
+	margin-top: -100vh;
+}
+
+/* label-status */
+.label-status {
+	background: rgba(255, 0, 0, 0.3);
+	color: #fff;
+	padding: 2px;
+	border-radius: 2px;
+}
+
+/* italic */
+.italic {
+	font-style: italic;
+}
+
+
+
+
+
+
+
+
+

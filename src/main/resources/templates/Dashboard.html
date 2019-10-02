@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:cmp="http://www.advocacia.com.br"
+	layout:decorate="~{layout/base}"
+	th:with="currentPage='dashboard'">
+	  
+	  <head>
+	  	<title>Dashboard</title>
+	  	<link rel="stylesheet" type="text/css" th:href="@{/css/advocacia.css}" />
+	  </head>
+	  
+	  <body class="root grey lighten-4">
+	  
+	  	<section layout:fragment="conteudo">	
+		  	
+			<div class="card-content">	
+				<!-- total de processos por status -->  
+				<!--<h5 class="grey-text">Status do processo</h5>-->	
+		  		<div class="row">
+		  			<div class="card-content center grey darken-2 col s12 m4 l4 waves-effect light-effect dashboard-card">
+		  				<h3 class="white-text">[[${protocolado}]]</h3>
+		  				<p class="white-text">PROTOCOLADO</p>
+		  			</div>
+					
+		  			<div class="card-content center grey darken-2 col s12 m4 l4 waves-effect light-effect dashboard-card">
+		  				<h3 class="white-text">[[${aguardandoAudienciaPericia}]]</h3>
+		  				<p class="white-text">AGUARDANDO AUDIÊNCIA/PERÍCIA</p>
+		  			</div>
+		  			
+		  			<div class="card-content center grey darken-2 col s12 m4 l4 waves-effect light-effect dashboard-card">
+		  				<h3 class="white-text">[[${julgadoPrimeiraInstancia}]]</h3>
+		  				<p class="white-text">JULGADO PRIMEIRA INSTÂNCIA</p>
+		  			</div>
+		  		</div>	
+		  		
+		  		<div class="row">
+		  			<div class="card-content center grey darken-2 col s12 m4 l4 waves-effect light-effect dashboard-card">
+		  				<h3 class="white-text">[[${julgadoSegundaInstancia}]]</h3>
+		  				<p class="white-text">JULGADO SEGUNDA INSTÂNCIA</p>
+		  			</div>
+
+		  			<div class="card-content center grey darken-2 col s12 m4 l4 waves-effect light-effect dashboard-card">
+		  				<h3 class="white-text">[[${transitadoEmJulgado}]]</h3>
+		  				<p class="white-text">TRANSITADO EM JULGADO</p>
+		  			</div>
+		  			
+		  			<div class="card-content center grey darken-2 col s12 m4 l4 waves-effect light-effect dashboard-card">
+		  				<h3 class="white-text">[[${emExecucao}]]</h3>
+		  				<p class="white-text">EM EXECUÇÃO</p>
+		  			</div>
+		  		</div>	
+		  		
+		  		<div class="row">
+		  			<div class="card-content center grey darken-2 col s12 m4 l4 waves-effect light-effect dashboard-card">
+		  				<h3 class="white-text">[[${encerrado}]]</h3>
+		  				<p class="white-text">ENCERRADO</p>
+		  			</div>
+
+		  			<div class="card-content center grey darken-2 col s12 m4 l4 waves-effect light-effect dashboard-card">
+		  				<h3 class="white-text">[[${arquivado}]]</h3>
+		  				<p class="white-text">ARQUIVADO</p>
+		  			</div>
+		  			
+		  			<div class="card-content center grey darken-2 col s12 m4 l4 waves-effect light-effect dashboard-card">
+		  				<h3 class="white-text">[[${totalProcessosCadastrados}]]</h3>
+		  				<p class="white-text">TOTAL DE PROCESSOS</p>
+		  			</div>
+		  		</div>
+		  		
+		  		<!-- agenda -->
+		  		<!--<h5 class="grey-text">Agenda</h5>-->	
+		  		<div class="row">	  			
+		  			<div class="card-content center grey darken-2 col s12 m4 l4 waves-effect light-effect dashboard-card">		  				
+		  				<h3 class="white-text">[[${totalCompromissosHoje}]]</h3>
+		  				<p class="white-text"><a th:href="@{/agendas}" class="white-text">COMPROMISSOS PARA HOJE</a></p>
+		  			</div>
+
+		  			<div class="card-content center grey darken-2 col s12 m4 l4 waves-effect light-effect dashboard-card">
+		  				<h3 class="white-text">[[${totalContasPagarHoje}]]</h3>
+		  				<p class="white-text">DESPESAS PARA PAGAR HOJE</p>
+		  			</div>
+		  			
+		  			<div class="card-content center grey darken-2 col s12 m4 l4 waves-effect light-effect dashboard-card">
+		  				<h3 class="white-text">[[${totalContasReceberHoje}]]</h3>
+		  				<p class="white-text">HONORÁRIOS PARA RECEBER HOJE</p>
+		  			</div>
+		  		</div>
+		  		
+		  		<!-- financeiro mes | ano -->
+		  		<!--<h5 class="grey-text">Financeiro</h5>-->	
+		  		<div class="row">
+		  			<div class="card-content center grey darken-2 col s12 m4 l4 waves-effect light-effect dashboard-card">
+		  				<h3 class="white-text">R$ [[${{valorTotalDespesasNoMes}}]]</h3>
+		  				<p class="white-text">TOTAL A PAGAR NO MÊS</p>
+		  			</div>
+		  			
+		  			<div class="card-content center grey darken-2 col s12 m4 l4 waves-effect light-effect dashboard-card">
+		  				<h3 class="white-text">R$ [[${{valorTotalDespesasHoje}}]]</h3>
+		  				<p class="white-text">TOTAL A PAGAR HOJE</p>
+		  			</div>
+		  			
+		  			<div class="card-content center grey darken-2 col s12 m4 l4 waves-effect light-effect dashboard-card">
+		  				<h3 class="white-text">R$ [[${{totalPagoNoMes}}]]</h3>
+		  				<p class="white-text">TOTAL PAGO</p>
+		  			</div>
+		  		</div>
+		  		
+		  		<!-- financeiro -->
+		  		<!--<h5 class="grey-text">Financeiro</h5>-->	
+		  		<div class="row">
+		  			<div class="card-content center grey darken-2 col s12 m4 l4 waves-effect light-effect dashboard-card">
+		  				<h3 class="white-text">R$ [[${{valorTotalReceitasNoMes}}]]</h3>
+		  				<p class="white-text">TOTAL A RECEBER NO MÊS</p>
+		  			</div>
+		  			
+		  			<div class="card-content center grey darken-2 col s12 m4 l4 waves-effect light-effect dashboard-card">
+		  				<h3 class="white-text">R$ [[${{valorTotalReceitasHoje}}]]</h3>
+		  				<p class="white-text">TOTAL A RECEBER HOJE</p>
+		  			</div>
+		  			
+		  			<div class="card-content center grey darken-2 col s12 m4 l4 waves-effect light-effect dashboard-card">
+		  				<h3 class="white-text">R$ [[${{totalRecebidoNoMes}}]]</h3>
+		  				<p class="white-text">TOTAL RECEBIDO</p>
+		  			</div>
+		  		</div>
+		  		
+		  		<!-- gráficos -->
+		  		<h5 class="grey-text">Gráficos</h5>	
+		  		
+		  		<!-- despesas -->
+		  		<div class="card row white">
+			  		<div class="card-content col s12 m12 l12">
+			  			<span class="card-title center">Gráfico de despesas por ano</span>
+			  			<canvas id="graficoDespesasAno"></canvas>
+			  		</div>
+			  	</div>
+			  	
+			  	<div class="card row white">
+			  		<div class="card-content col s12 m12 l12">
+			  			<span class="card-title center">Gráfico de despesas por mês</span>
+			  			<canvas id="graficoDespesasMes"></canvas>
+			  		</div>
+			  	</div>
+			  	
+			  	<!-- receitas -->
+			  	<div class="card row white">
+			  		<div class="card-content col s12 m12 l12">
+			  			<span class="card-title center">Gráfico de receitas por ano</span>
+			  			<canvas id="graficoReceitasAno"></canvas>
+			  		</div>
+			  	</div>
+
+			  	<div class="card row white">
+			  		<div class="card-content col s12 m12 l12">
+			  			<span class="card-title center">Gráfico de receitas por mês</span>
+			  			<canvas id="graficoReceitasMes"></canvas>
+			  		</div>
+			  	</div>
+			  	
+			  	<!-- agenda -->
+			  	<!--
+			  	<div class="card row white">
+			  		<div class="card-content col s12 m12 l12">
+			  			<span class="card-title center">Gráfico de compromissos por mês</span>
+			  			<canvas id="graficoCompromissoMes"></canvas>
+			  		</div>
+			  	</div>
+			  	-->
+		  	</div>
+	  	</section>
+
+	  	<th:block layout:fragment="javascript-extra">
+	  		<script type="text/javascript" th:src="@{/js/vendors/Chart.js}"></script>
+	  		<script type="text/javascript" th:src="@{/js/dashboard.graficos.js}"></script>
+		</th:block>
+	  </body>
+	  
+</html>

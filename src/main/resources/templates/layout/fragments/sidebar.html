@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+	<ul id="slide-out" class="side-nav fixed grey darken-4" th:fragment="sidebar">
+		<!-- LOGO -->
+		<li>
+			<a class="userView waves-effect waves-light grey darken-3 valign-wrapper" th:href="@{/}">
+				<i class="cover material-icons blue-grey-text text-lighten-5 tooltipped" data-tooltip="Início" data-position="right">dashboard</i>
+				<span class="blue-grey-text text-lighten-5 title">ADVOCACIA</span>
+			</a>
+		</li>
+		
+		<!-- INICIO -->
+		<li>	
+			<a class="waves-effect waves-green" th:classappend="${currentPage == 'dashboard'} ? sidenav-active" th:href="@{/}">
+				<i class="material-icons tooltipped" data-tooltip="INÍCIO" data-position="right">home</i>INÍCIO
+			</a>
+		</li>
+		
+		<!-- CLIENTE -->
+		<li>
+			<a class="waves-effect waves-green" th:classappend="${currentPage == 'cliente'} ? sidenav-active" th:href="@{/clientes/novo}">
+				<i class="material-icons tooltipped" data-tooltip="CLIENTE" data-position="right">person</i>CLIENTE
+			</a>	
+		</li>
+		
+		<!-- PROCESSO -->
+		<li>
+			<a class="waves-effect waves-green" th:classappend="${currentPage == 'processo'} ? sidenav-active" th:href="@{/processos/novo}">
+				<i class="material-icons tooltipped" data-tooltip="PROCESSO" data-position="right">hourglass_empty</i>PROCESSO
+			</a>	
+		</li>
+		
+		<!-- DESPESA TIRAR DEPOIS -->
+		<!--<li>
+			<a class="waves-effect waves-green" th:classappend="${currentPage == 'despesa'} ? sidenav-active" th:href="@{/despesas/nova}">
+				<i class="material-icons tooltipped" data-tooltip="DESPESA DO PROCESSO" data-position="right">attach_money</i>DESPESA
+			</a>	
+		</li>-->
+		
+		<!-- CONTA PAGAR -->
+		<li>
+			<a class="waves-effect waves-green" th:classappend="${currentPage == 'contaPagar'} ? sidenav-active" th:href="@{/contasPagar/nova}">
+				<i class="material-icons tooltipped" data-tooltip="DESPESA" data-position="right">payment</i>DESPESAS
+			</a>	
+		</li>
+		
+		<!-- CONTA PAGAR LANÇAMENTO -->
+		<li>
+			<a class="waves-effect waves-green" th:classappend="${currentPage == 'contaPagarLancamento'} ? sidenav-active" th:href="@{/contasPagarLancamento/nova}">
+				<i class="material-icons tooltipped" data-tooltip="LANÇAR DESPESA" data-position="right">payment</i>L. DESPESA
+			</a>	
+		</li>
+
+		<!-- CONTA RECEBER -->
+		<li>
+			<a class="waves-effect waves-green" th:classappend="${currentPage == 'contaReceber'} ? sidenav-active" th:href="@{/contasReceber/nova}">
+				<i class="material-icons tooltipped" data-tooltip="HONORÁRIOS" data-position="right">attach_money</i>HONORÁRIOS
+			</a>	
+		</li>
+
+		<!-- CONTA RECEBER LANÇAMENTO -->
+		<li>
+			<a class="waves-effect waves-green" th:classappend="${currentPage == 'contaReceberLancamento'} ? sidenav-active" th:href="@{/contasReceberLancamento/nova}">
+				<i class="material-icons tooltipped" data-tooltip="LANÇAR HONORÁRIOS" data-position="right">attach_money</i>L. HONORÁRIO
+			</a>	
+		</li>
+		
+		<!-- AGENDA -->
+		<li>
+			<a class="waves-effect waves-green" th:classappend="${currentPage == 'agenda'} ? sidenav-active" th:href="@{/agendas/nova}">
+				<i class="material-icons tooltipped" data-tooltip="AGENDA" data-position="right">date_range</i>AGENDA
+			</a>	
+		</li>
+		
+		<!-- DESPESA -->
+		<li>
+			<a class="waves-effect waves-green" th:classappend="${currentPage == 'caixa'} ? sidenav-active" th:href="@{/caixas}">
+				<i class="material-icons tooltipped" data-tooltip="CAIXA" data-position="right">poll</i>CAIXA
+			</a>	
+		</li>
+		
+		<!-- USUÁRIOS -->	
+		<li>
+			<a class="waves-effect waves-green" th:classappend="${currentPage == 'usuario'} ? sidenav-active" th:href="@{/usuarios/novo}">
+				<i class="material-icons tooltipped" data-tooltip="USUÁRIOS" data-position="right">assignment_ind</i>USUÁRIOS
+			</a>	
+		</li>
+		
+		<!-- RELATÓRIOS -->
+		<li>
+			<a class="waves-effect waves-green" th:classappend="${currentPage == 'relatorios'} ? sidenav-active" th:href="@{/relatorios}">
+				<i class="material-icons tooltipped" data-tooltip="RELATÓRIOS" data-position="right">assignment</i>RELATÓRIOS
+			</a>
+		</li>
+		
+		<!-- SAIR -->
+		<!--	
+		<li>		
+			<a class="waves-effect waves-green" th:href="@{/logout}">
+				<i class="material-icons tooltipped" data-tooltip="SAIR" data-position="right">power_settings_new</i>SAIR
+			</a>
+		</li>
+		-->	
+	</ul>	
+</html>

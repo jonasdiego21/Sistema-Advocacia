@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:cmp="http://www.advocacia.com.br"
+	layout:decorate="~{layout/base}"
+	th:with="currentPage='processo'">
+	  
+	  <head>
+	  	<title>Pesquisa Processo</title>
+	  </head>
+	  
+	  <body>
+	  	<section layout:fragment="conteudo">
+			
+			<cmp:navegacao url="@{/processos}" texto="Processo" />
+				
+				<form class="card" method="GET" th:action="@{/processos}" th:object="${processoFilter}">
+					<cmp:titulo texto="Processo" />	
+					
+					<div class="card-content">
+					
+					<div class="row">
+						<div class="input-field col s12 m6 l6">
+							<select id="cliente" th:field="*{cliente}">
+								<option value="">SELECIONE O CLIENTE</option>
+								<option th:each="cliente : ${clientes}" th:value="${cliente.codigo}" th:text="${cliente.nome}"></option>
+							</select>
+							<label for="cliente">Cliente</label>
+						</div>
+						
+						<div class="input-field col s12 m6 l6">
+							<input type="text" id="numeroProcesso" th:field="*{numeroProcesso}" />
+							<label for="nome">Número do processo</label>
+						</div>
+					</div>
+						
+					<div class="row">
+						<div class="input-field col s12 m8 l8">
+							<input type="text" id="nomeParteContraria" th:field="*{nomeParteContraria}">
+							<label for="nomeParteContraria">Nome parte contrária</label>
+						</div>
+						
+						<div class="input-field col s12 m4 l4">
+							<select id="status" th:field="*{status}">
+								<option value="">SELECIONE O STATUS</option>
+								<option th:each="status : ${status}" th:value="${status}" th:text="${status.descricao}"></option>
+							</select>				
+							<label for="status">Status</label>
+						</div>
+					</div>
+					
+					<div class="card-action col s12 m12 l12">
+						<input type="submit" value="Pesquisar" class="btn btn-primary right" />
+					</div>
+  	
+				  	<div class="row">
+						<div class="col s12 m12 l12">
+							<table class="responsive-table striped highlight">
+								<thead>
+									<tr>
+										<th>Codigo</th>
+										<th>Número do processso</th>
+										<th>Cliente</th>
+										<th>Parte Contrária</th>
+										<th>Status</th>
+										<th>Ações</th>
+									</tr>
+								</thead>
+								
+								<tbody>
+									<tr th:each="processo : ${processos}">
+										<td class="italic" th:text="${processo.codigo}"></td>
+										<td th:text="${processo.numeroProcesso}"></td>
+										<td th:text="${processo.cliente.nome}"></td>
+										<td th:text="${processo.nomeParteContraria}"></td>
+										<td>
+											<label class="label-status" th:text="${processo.status.descricao}"></label>
+										</td>
+										<td>
+											<a href="javascript:;" class="tooltipped" data-tooltip="Excluir" data-position="bottom" data:url="@{/processos/{codigo}(codigo = ${processo.codigo})}">
+												<i class="material-icons">delete</i>
+											</a>
+											<a th:href="@{/processos/{codigo}(codigo = ${processo.codigo})}" class="tooltipped" data-tooltip="Alterar" data-position="bottom">
+												<i class="material-icons">edit</i>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					</div>
+					
+					<cmp:pagination page="${pagina}" />
+				</form>
+			</section>
+	  </body>
+	  
+</html>

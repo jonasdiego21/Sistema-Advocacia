@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:cmp="http://www.advocacia.com.br"
+	layout:decorate="~{layout/base}"
+	th:with="currentPage='contaReceber'">
+	  
+	  <head>
+	  	<title>Pesquisar Conta a Receber</title>
+	  </head>
+	  
+	  <body>  	
+		<section layout:fragment="conteudo">
+			<cmp:navegacao url="@{/contasReceber}" texto="honorários" />
+						
+			<form class="card" method="GET">
+				
+				<cmp:titulo texto="Honorários" />	
+				
+				<div class="card-content">
+					<div class="row">
+						<div class="input-field col s12 m8 l8">
+							<input type="text" id="devedor" />
+							<label for="devedor">Devedor</label>
+						</div>
+						
+						<div class="input-field col s12 m4 l4">
+							<input type="text" id="dataVencimento" class="datepicker" />
+							<label for="dataVencimento">Vencimento</label>
+						</div>
+					</div>
+					
+					<div class="card-action col s12 m12 l12">
+						<input type="submit" value="Pesquisar" class="btn btn-primary right" />
+					</div>
+					
+					<div class="row">
+						<div class="col s12 m12 l12">
+							<table class="responsive-table striped highlight">
+								<thead>
+									<tr>
+										<th>Código</th>
+										<th>Devedor</th>
+										<th>Número do processo</th>
+										<th>Data do Vencimento</th>
+										<th>Valor (R$)</th>
+										<th class="center-align">Ações</th>
+									</tr>
+								</thead>
+								
+								<tbody>
+									<tr th:each="contaReceber : ${contasReceber}">
+										<td th:text="${contaReceber.codigo}"></td>
+										<td th:text="${contaReceber.cliente.nome}"></td>
+										<td th:text="${contaReceber.numeroProcesso}"></td>
+										<td th:text="${contaReceber.dataVencimento}"></td>
+										<td th:text="${contaReceber.valor}"></td>
+										<td class="center-align">
+											<a href="javascript:;" class="tooltipped js-btn-excluir" data-tooltip="Excluir" data-position="bottom" data:url="@{/contasReceber/{codigo}(codigo = ${contaReceber.codigo})}">
+												<i class="material-icons">delete</i>
+											</a>
+											<a th:href="@{/contasReceber/{codigo}(codigo = ${contaReceber.codigo})}" class="tooltipped" data-tooltip="Alterar" data-position="bottom">
+												<i class="material-icons">edit</i>
+											</a>
+											<!--
+											<a th:href="@{/contasReceberLancamento/nova}" class="tooltipped" data-tooltip="Receber" data-position="bottom">
+												<i class="material-icons">attach_money</i>
+											</a>
+											-->
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+				<!--<cmp:pagination page="${pagina}" />-->
+			</form>
+		</section>
+	  </body>  
+</html>

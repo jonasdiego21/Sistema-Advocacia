@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:cmp="http://www.advocacia.com.br"
+	layout:decorate="~{layout/base}"
+	th:with="currentPage='cliente'">
+	  
+	  <head>
+	  	<title>Pesquisa Cliente</title>
+	  </head>
+	  
+	  <body>
+	  	<section layout:fragment="conteudo">
+			
+			<cmp:navegacao url="@{/clientes}" texto="Cliente" />
+				
+				<form class="card" method="GET" th:action="@{/clientes}" th:object="${clienteFilter}">
+					<cmp:titulo texto="Cliente" />	
+					
+					<div class="card-content">			
+						<div class="row">
+							<div class="input-field col s12 m8 l8">
+								<input type="text" th:field="*{nome}" id="nome" />
+								<label for="nome">Nome</label>
+							</div>
+							
+							<div class="input-field col s12 m4 l4">
+								<input type="text" th:field="*{cpf}" id="nome" class="js-cpf" />
+								<label for="nome">CPF</label>
+							</div>
+						</div>
+						
+						<div class="card-action col s12 m12 l12">
+							<input type="submit" value="Pesquisar" class="btn btn-primary right" />
+						</div>
+	  	
+					  	<div class="row">
+							<div class="col s12 m12 l12">
+								<table class="responsive-table striped highlight">
+									<thead>
+										<tr>
+											<th>Codigo</th>
+											<th>Nome</th>
+											<th>CPF</th>
+											<th>Telefone</th>
+											<th>Ações</th>
+										</tr>
+									</thead>
+									
+									<tbody>
+										<tr th:each="cliente : ${clientes}">
+											<td th:text="${cliente.codigo}"></td>
+											<td th:text="${cliente.nome}"></td>
+											<td th:text="${cliente.cpf}"></td>
+											<td th:text="${cliente.celularPrincipal}"></td>
+											<td>
+												<a href="javascript:;" class="tooltipped js-btn-excluir" data-tooltip="Excluir" data-position="bottom" data:url="@{/clientes/{codigo}(codigo = ${cliente.codigo})}">
+													<i class="material-icons">delete</i>
+												</a>
+												<a th:href="@{/clientes/{codigo}(codigo = ${cliente.codigo})}" class="tooltipped" data-tooltip="Alterar" data-position="bottom">
+													<i class="material-icons">edit</i>
+												</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					
+					<cmp:pagination page="${pagina}" />
+				</form>
+			</section>
+			
+			<th:block layout:fragment="javascript-extra">
+				<script th:src="@{/js/advocacia.dialogo-excluir.js}"></script>
+				<script th:src="@{/js/vendors/sweetalert.min.js}"></script>
+			</th:block>
+	  </body>
+	  
+</html>

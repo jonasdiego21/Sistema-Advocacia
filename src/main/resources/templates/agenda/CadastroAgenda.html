@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:cmp="http://www.advocacia.com.br"
+	layout:decorate="~{layout/base}"
+	th:with="currentPage='agenda'">
+	  
+	  <head>
+	  	<title>Cadastro Agenda</title>
+	  	<!--
+	  	<link rel="stylesheet" type="text/css" th:href="@{/uikit-2.27.4/css/uikit.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/uikit-2.27.4/css/components/datepicker.min.css}" />
+		-->
+	  </head>
+	  
+	  <body>  	
+		<section layout:fragment="conteudo">
+			<cmp:navegacao url="@{/agendas}" texto="agenda" />
+						
+			<form class="card" method="POST" th:action="@{/agendas}" th:object="${agenda}">
+				<cmp:message />
+				
+				<input type="hidden" th:field="*{codigo}" />
+				
+				<cmp:titulo texto="Agenda" />	
+				
+				<div class="card-content">
+					<div class="row">
+						<div class="input-field col s12 m6 l6" >
+							<input id="titulo" type="text" class="validate" th:field="*{titulo}" />
+							<cmp:required label="Título" for="titulo" />
+						</div>
+						
+						<div class="input-field col s12 m6 l6" >
+							<input id="descricao" type="text" class="validate" th:field="*{descricao}" />
+							<cmp:required label="Descrição" for="descricao" />
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="input-field col s12 m6 l6">
+							<input id="dataCompromisso" type="text" class="datepicker js-data" th:field="*{dataCompromisso}" data-uk-datepicker="{format:'DD/MM/YYYY'}" />
+							<cmp:required label="Data do compromisso" for="dataCompromisso" />
+						</div>
+						
+						<div class="input-field col s12 m6 l6">
+							<input id="horaCompromisso" type="text" class="js-hora" th:field="*{horaCompromisso}" />
+							<cmp:required label="Horário do compromisso" for="horaCompromisso" />
+						</div>
+					</div>
+					
+					<div class="card-action right-align" >
+						<a th:href="@{/agendas}" class="btn waves-effect white-text ed-button">Pesquisar</a>
+						<button type="submit" class="btn waves-effect white-text ed-button">Salvar</button>
+					</div>
+				</div>
+			</form>
+		</section>
+		<!--
+		<th:block layout:fragment="javascript-extra">
+			<script type="text/javascript" th:src="@{/uikit-2.27.4/js/uikit.min.js}"></script>
+			<script type="text/javascript" th:src="@{/uikit-2.27.4/js/components/datepicker.js}"></script>
+		</th:block>
+		-->
+	  </body>	  
+</html>

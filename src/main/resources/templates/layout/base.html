@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+	<head>
+		
+		<title>Advocacia</title>
+		
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="msapplication-tap-highlight" content="no" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		
+		<!-- material icons | materialize -->
+		<link rel="stylesheet" type="text/css" th:href="@{/css/vendors/materialize.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/fonts/icons/material-icons.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/fonts/icons/material-icons-google.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/layout.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/css/vendors/jquery-te-1.4.0.css}" />	
+		<!--<link rel="stylesheet" type="text/css" th:href="@{/uikit-2.27.4/css/uikit.min.css}" />-->	
+		<link rel="stylesheet" type="text/css" th:href="@{/uikit-2.27.4/css/components/datepicker.css}" />
+
+		<!-- layout -->
+		<link rel="stylesheet" type="text/css" th:href="@{/css/advocacia.css}" />
+	</head>
+	
+	<body class="root blue-grey lighten-4">
+		
+		<th:block th:replace="layout/fragments/header :: header"></th:block>
+		<th:block th:replace="layout/fragments/sidebar :: sidebar"></th:block>
+		
+		<main class="sidenav-opened">	
+			<section class="main-container" layout:fragment="conteudo">
+				<!-- CONTEÚDO AQUI -->
+			</section>	
+		</main>
+		
+		<!-- Plugins -->
+		<script type="text/javascript" th:src="@{/js/vendors/jquery-3.2.1.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/vendors/cookie.js}"></script>	
+		<script type="text/javascript" th:src="@{/js/vendors/jquery.mask.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/vendors/jquery-te-1.4.0.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/vendors/jquery-maskmoney.js}"></script>
+		<script type="text/javascript" th:src="@{/uikit-2.27.4/js/uikit.min.js}"></script>
+		<script type="text/javascript" th:src="@{/uikit-2.27.4/js/components/datepicker.js}"></script>
+		
+		<!-- Framework -->
+		<script type="text/javascript" th:src="@{/js/vendors/materialize.min.js}"></script>
+		<script type="text/javascript" th:src="@{/js/layout.js}"></script>
+		<script type="text/javascript" th:src="@{/js/advocacia.js}"></script>		
+		<script type="text/javascript" th:src="@{/js/inicializadores.js}"></script>
+		
+		<th:block layout:fragment="javascript-extra"></th:block>
+		<!-- FIM FUNÇÕES -->
+		
+	</body>
+	
+</html>

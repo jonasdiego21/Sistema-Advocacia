@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:cmp="http://www.advocacia.com.br"
+	layout:decorate="~{layout/base}"
+	th:with="currentPage='contaPagar'">
+	  
+	  <head>
+	  	<title>Pesquisar Conta a Pagar</title>
+	  </head>
+	  
+	  <body>  	
+		<section layout:fragment="conteudo">
+			<cmp:navegacao url="@{/contasPagar}" texto="despesa" />
+						
+			<form class="card" method="GET">
+				
+				<cmp:titulo texto="Despesa" />	
+				
+				<div class="card-content">
+					<div class="row">
+						<div class="input-field col s12 m8 l8">
+							<input type="text" id="fornecedor" />
+							<label for="fornecedor">Fornecedor</label>
+						</div>
+						
+						<div class="input-field col s12 m4 l4">
+							<input type="text" id="dataVencimento" class="datepicker" />
+							<label for="dataVencimento">Vencimento</label>
+						</div>
+					</div>
+					
+					<div class="card-action col s12 m12 l12">
+						<input type="submit" value="Pesquisar" class="btn btn-primary right" />
+					</div>
+					
+					<div class="row">
+						<div class="col s12 m12 l12">
+							<table class="responsive-table striped highlight">
+								<thead>
+									<tr>
+										<th>Código</th>
+										<th>Fornecedor do serviço</th>
+										<th>Data do Vencimento</th>
+										<th>Valor (R$)</th>
+										<th class="center-align">Ações</th>
+									</tr>
+								</thead>
+								
+								<tbody>
+									<tr th:each="contaPagar : ${contasPagar}">
+										<td th:text="${contaPagar.codigo}"></td>
+										<td th:text="${contaPagar.fornecedor}"></td>
+										<td th:text="${contaPagar.dataVencimento}"></td>
+										<td th:text="${contaPagar.valorTotal}"></td>
+										<td class="center-align">
+											<a href="javascript:;" class="tooltipped js-btn-excluir" data-tooltip="Excluir" data-position="bottom" data:url="@{/contasPagar/{codigo}(codigo = ${contaPagar.codigo})}">
+												<i class="material-icons">delete</i>
+											</a>
+											<a th:href="@{/contasPagar/{codigo}(codigo = ${contaPagar.codigo})}" class="tooltipped" data-tooltip="Alterar" data-position="bottom">
+												<i class="material-icons">edit</i>
+											</a>
+											<!--
+											<a th:href="@{/contasPagarLancamento/nova}" class="tooltipped" data-tooltip="Pagar" data-position="bottom">
+												<i class="material-icons">payment</i>
+											</a>
+											-->
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+				<!--<cmp:pagination page="${pagina}" />-->
+			</form>
+		</section>
+	  </body>  
+</html>

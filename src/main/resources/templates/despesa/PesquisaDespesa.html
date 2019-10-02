@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:cmp="http://www.advocacia.com.br"
+	layout:decorate="~{layout/base}"
+	th:with="currentPage='despesa'">
+	  
+	  <head>
+	  	<title>Pesquisa Despesa</title>
+	  	<link rel="stylesheet" type="text/css" th:href="@{/uikit-2.27.4/css/components/upload.min.css}" />
+	  </head>
+	  
+	  <body>
+	  	<section layout:fragment="conteudo">
+			<cmp:navegacao url="@{/despesas}" texto="Despesa" />
+				<form class="card" method="POST" th:action="@{/despesas}" th:object="${despesa}">
+		
+					<cmp:message />
+					
+					<input type="hidden" th:field="*{codigo}" />
+				
+					<cmp:titulo texto="Despesa" />				
+						<!-- INICIO CAMPOS -->
+						<div class="card-content">
+							
+							<div class="row">
+								<div class="input-field col s12 m3 l3 validate">
+									<cmp:required label="descricao" for="descricao" />
+									<input id="descricao" type="text" th:field="*{descricao}" th:errorclass="invalid" />
+								</div>
+							</div>
+							
+						</div>
+					</form>
+					<!-- FIM FORMULÁRIO -->				
+			</section>
+			
+			<th:block layout:fragment="javascript-extra">
+				<script th:src="@{/js/vendors/jquery-te-1.4.0.min.js}"></script>
+				<script th:src="@{/js/combo.estado-cidade.js}"></script>
+				<script th:src="@{/uikit-2.27.4/js/uikit.min.js}"></script>
+				<script th:src="@{/uikit-2.27.4/js/components/upload.min.js}"></script>
+				<script th:src="@{/js/componente-upload.js}"></script>
+				<!--<script th:src="@{/js/add-documentos-provas.js}"></script>-->
+			</th:block>
+	  </body>  
+</html>

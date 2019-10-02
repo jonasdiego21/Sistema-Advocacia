@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:cmp="http://www.advocacia.com.br">
+	
+	<head>	
+		<title>Advocacia</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="msapplication-tap-highlight" content="no" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		
+		<!-- framework -->		
+		<link rel="stylesheet" type="text/css" th:href="@{css/vendors/materialize.min.css}" />	
+		<link rel="stylesheet" type="text/css" th:href="@{css/fonts/icons/material-icons.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{css/fonts/icons/material-icons-google.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{css/advocacia.css}" />
+	</head>
+	
+	<body class="root grey darken-3">
+		
+		<main class="center-login">
+			<div class="main-container center-login">
+				<div class="row center">
+					<div class="input-field col s12 m12 l12">
+						<h5 class="white-text">Por favor, faça seu login</h5>
+					</div>
+				</div>
+			
+				<form th:action="@{/login}" method="POST">
+					<div class="main-container login-card">
+
+						<div th:if="${#bools.isTrue(param.error)}" class="col s12 m12 l12 error">							
+							<span>E-mail e/ou senha incorreto(s)</span>
+							<span class="msg-login-button right">x</span>
+						</div>
+						
+						<div class="row">
+							<div class="input-field col s12 m12 l12">
+								<input type="text" name="username" id="email" />
+								<cmp:required label="Seu E-mail" for="email" />
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="input-field col s12 m12 l12">
+								<input type="password" name="password" id="senha" />
+								<cmp:required label="Sua Senha" for="senha" />
+							</div>
+						</div>
+						
+						<div class="row right">
+							<div class="col s12 m12 l12">
+								<a th:href="@{/recuperarSenha}" class="tooltipped" data-tooltip="Redefinir senha" data-position="right">Esqueceu sua senha?</a>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col s12 m12 l12">
+								<input type="submit" value="Entrar" class="btn btn-primary blue" />
+							</div>
+						</div>
+						
+					</div>
+				</form>
+				
+			</div>
+			
+		</main>	
+		
+		<footer>
+			<div class="row">
+				<div class="col s12 m12 l12 center">
+					<p class="white-text">Copyright &copy; SME 2017, Todos os direitos reservados.</p>
+				</div>
+			</div>
+		</footer>
+		
+		<!-- Plugins -->
+		<script type="text/javascript" th:src="@{js/vendors/jquery-3.2.1.min.js}"></script>
+		<!--<script type="text/javascript" th:src="@{js/vendors/jquery.mask.min.js}"></script>-->
+	    <script type="text/javascript" th:src="@{js/vendors/cookie.js}"></script>
+		
+	    <!-- Framework -->
+		<script type="text/javascript" th:src="@{js/vendors/materialize.min.js}"></script>
+		<script type="text/javascript" th:src="@{js/advocacia.js}"></script>
+		<script>
+			$(function() {
+				$('.msg-login-button').on('click', function() {
+					$('.error').slideUp(100);
+				});
+			});
+		</script>
+			
+	</body>
+	
+</html>

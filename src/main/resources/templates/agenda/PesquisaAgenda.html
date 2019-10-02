@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:cmp="http://www.advocacia.com.br"
+	layout:decorate="~{layout/base}"
+	th:with="currentPage='agenda'">
+	  
+	  <head>
+	  	<title>Pesquisar Agenda</title>
+	  </head>
+	  
+	  <body>  	
+		<section layout:fragment="conteudo">
+			<cmp:navegacao url="@{/agendas}" texto="agenda" />
+						
+			<form class="card" method="GET">
+				
+				<cmp:titulo texto="Agenda" />	
+				
+				<div class="card-content">
+					<div class="row">
+						<!-- campos para pesquisar -->
+					</div>
+					
+					<div class="row">
+						<div class="col s12 m12 l12">
+							<table class="responsive-table striped highlight">
+								<thead>
+									<tr>
+										<th>Código</th>
+										<th>Título</th>
+										<th>Descrição</th>
+										<th>Data/Hora</th>
+										<th>Ações</th>
+									</tr>
+								</thead>
+								
+								<tbody>
+									<tr th:each="agenda : ${agendas}">
+										<td th:text="${agenda.codigo}"></td>
+										<td th:text="${agenda.titulo}"></td>
+										<td th:text="${agenda.descricao}"></td>
+										<td th:text="|${agenda.dataCompromisso}/${agenda.horaCompromisso}|"></td>
+										<td>
+											<a href="javascript:;" class="tooltipped js-btn-excluir" data-tooltip="Excluir" data-position="bottom" data:url="@{/agendas/{codigo}(codigo = ${agenda.codigo})}">
+												<i class="material-icons">delete</i>
+											</a>
+											<a th:href="@{/agendas/{codigo}(codigo = ${agenda.codigo})}" class="tooltipped" data-tooltip="Alterar" data-position="bottom">
+												<i class="material-icons">edit</i>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+				<!--<cmp:pagination page="${pagina}" />-->
+			</form>
+		</section>
+	  </body>  
+</html>

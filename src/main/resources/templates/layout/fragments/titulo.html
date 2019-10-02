@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+	<th:block th:fragment="titulo (texto)">	
+		<div class="card-image grey darken-3 center-align" >
+			<a th:if="${acao == 'ADICIONAR'}" class="card-title-large blue-grey-text text-lighten-5" th:text="|Cadastrar ${texto}|"></a>
+			<a th:if="${acao == 'EDITAR'}" class="card-title-large blue-grey-text text-lighten-5" th:text="|Editar ${texto}|"></a>
+			<a th:if="${acao == 'PESQUISAR'}"  class="card-title-large blue-grey-text text-lighten-5" th:text="|Pesquisar ${texto}|"></a>
+			<a th:if="${acao == ''}"  class="card-title-large blue-grey-text text-lighten-5" th:text="${texto}"></a>
+		</div>	
+	</th:block>	
+</html>

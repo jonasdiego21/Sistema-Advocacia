@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+	<th:block th:fragment="loader (id)">
+		<!-- id="ltc-preloader" -->
+		<div class="input-field col s12 m1 l1" style="display: none" th:id="${id}">	
+			<div class="preloader-wrapper small active">
+				<div class="spinner-layer spinner-green-only">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+										
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>			
+				</div>						
+			</div>
+		</div>		
+	</th:block>
+</html>

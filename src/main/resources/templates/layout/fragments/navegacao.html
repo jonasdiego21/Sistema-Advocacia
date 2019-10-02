@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+	
+	<th:block th:fragment="navegacao (url, texto)">
+		<div class="col s12 breadcrumbs valign-wrapper">
+			<a th:href="@{/}" class="breadcrumb blue-grey-text">
+				<i class="material-icons left">home</i>
+			</a>
+			
+			<a th:href="${url}" th:text="${texto}" class="breadcrumb blue-grey-text"></a>
+			
+			<a th:if="${acao == 'ADICIONAR'}" class="breadcrumb blue-grey-text">Cadastro</a>
+			<a th:if="${acao == 'EDITAR'}"  class="breadcrumb blue-grey-text">Edição</a>
+			<a th:if="${acao == 'PESQUISAR'}"  class="breadcrumb blue-grey-text">Pesquisa</a>	
+		</div>
+	</th:block>
+</html>

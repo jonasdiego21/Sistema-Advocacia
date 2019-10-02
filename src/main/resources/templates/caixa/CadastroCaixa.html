@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:cmp="http://www.advocacia.com.br"
+	layout:decorate="~{layout/base}"
+	th:with="currentPage='caixa'">
+	  
+	  <head>
+	  	<title>Cadastro Caixa</title>
+	  </head>
+	  
+	  <body>
+	  	
+		<section layout:fragment="conteudo">
+			<cmp:navegacao url="@{/caixas}" texto="Caixa" />
+			
+			<cmp:titulo texto="Caixa" />	
+			
+			<div class="card-content white">
+				<div class="row">
+					<div class="col s12 m4 l4 green lighten-4 center waves-effect light-effect dashboard-card">
+						<h6 class="card-title green-text darken-4-text">RECEITAS</h6>
+						<h4 class="card-content green-text darken-4-text">R$ [[${{valorTotalReceitasNoMes}}]]</h4>
+					</div>
+						 
+					<div class="col s12 m4 l4 red lighten-4 center waves-effect light-effect dashboard-card">
+						<h6 class="card-title red-text darken-4-text">DESPESAS</h6>
+						<h4 class="card-content red-text darken-4-text">-R$ [[${{valorTotalDespesasNoMes}}]]</h4>
+					</div>
+						
+					<div class="col s12 m4 l4 blue lighten-4 center waves-effect light-effect dashboard-card">
+						<h6 class="card-title blue-text darken-4-text">EM CAIXA</h6>
+						<h4 class="card-content blue-text darken-4-text">R$ [[${{restante}}]]</h4>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	  </body>
+	  
+</html>

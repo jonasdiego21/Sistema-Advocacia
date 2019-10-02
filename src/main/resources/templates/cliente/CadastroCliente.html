@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:cmp="http://www.advocacia.com.br"
+	layout:decorate="~{layout/base}"
+	th:with="currentPage='cliente'">
+	  
+	  <head>
+	  	<title>Cadastro Cliente</title>
+	  	<!--
+	  	<link rel="stylesheet" type="text/css" th:href="@{/uikit-2.27.4/css/uikit.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/uikit-2.27.4/css/components/datepicker.min.css}" />
+		-->
+	  </head>
+	  
+	  <body>
+	  	<section layout:fragment="conteudo">
+			<cmp:navegacao url="@{/clientes}" texto="Cliente" />
+				<form class="card" method="POST" th:action="@{/clientes}" th:object="${cliente}">
+		
+					<cmp:message />
+					
+					<input type="hidden" th:field="*{codigo}" />
+				
+					<cmp:titulo texto="Cliente" />				
+						<!-- INICIO CAMPOS -->
+						<div class="card-content">
+
+							<div class="row">
+								<div class="input-field col s12 m8 l8 validate">
+									<cmp:required label="nome" for="nome" />
+									<input id="nome" type="text" th:field="*{nome}" th:errorclass="invalid" />
+								</div>
+								
+								<div class="input-field col s12 m4 l4 validate">
+									<cmp:required label="CEP" for="cep" />
+									<input id="cep" type="text" th:field="*{cep}" class="js-cep" th:errorclass="invalid" />
+								</div>
+							</div>
+							
+							<div class="row">
+								<!-- Estado -->
+								<div class="input-field col s12 m4 l4">			
+									<select th:field="*{estado}" id="estado">
+										<option value="" >Selecione o estado</option>
+										<option th:each="estado : ${estados}" th:value="${estado.codigo}" th:text="${estado.nome}" ></option>
+									</select>
+									<cmp:required label="Estado" for="estado" />				
+								</div>
+								
+								<!-- Cidade -->							
+								<div class="input-field col s12 m8 l8" id="ltc-container-municipio" >							
+									<select th:field="*{cidade}" data:url="@{/cidades}" id="cidade" disabled="disabled">
+										<option value="">Selecione a cidade</option>
+									</select>
+									<cmp:required label="Cidade" for="cidade" />							
+								</div>
+								
+								<cmp:loader id="lct-preloader-municipio" />
+							</div>
+							
+							<div class="row">
+								<div class="input-field col s12 m8 l8 validate">
+									<label for="logradouro">Logradouro</label>
+									<input id="logradouro" type="text" th:field="*{logradouro}" th:errorclass="invalid" />
+								</div>
+								
+								<div class="input-field col s12 m4 l4 validate">
+									<label for="complemento">Complemento</label>
+									<input id="complemento" type="text" th:field="*{complemento}" />
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="input-field col s12 m4 l4 validate">
+									<select th:field="*{estadoCivil}" id="estadoCivil">
+										<option value="">Selecione o Estado Civil</option>
+										<option th:each="estadoCivil : ${estadosCivis}" th:value="${estadoCivil}" th:text="${estadoCivil.descricao}"></option>
+									</select>
+									<cmp:required label="Estado Civil" for="estadoCivil" />	
+								</div>
+								
+								<div class="input-field col s12 m8 l8 validate">
+									<cmp:required label="Profissão" for="profissao" />
+									<input id="profissao" type="text" th:field="*{profissao}" th:errorclass="invalid" />
+									<!-- usar um select -->
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="input-field col s12 m3 l3 validate">
+									<cmp:required label="RG/IE" for="rg" />
+									<input id="rg" type="text" th:field="*{rg}"  class="js-rg" th:errorclass="invalid" />
+								</div>
+								<!-- cpf | cnpj -->
+								<div class="input-field col s12 m3 l3 validate">
+									<cmp:required label="CPF/CNJP" for="cpf" />
+									<input id="cpf" type="text" th:field="*{cpf}"  class="js-cpfcnpj" th:errorclass="invalid" />
+								</div>
+								
+								<div class="input-field col s12 m3 l3 validate">
+									<label for="ctps">CTPS</label>
+									<input id="ctps" type="text" th:field="*{ctps}"  class="js-ctps" th:errorclass="invalid" />
+								</div>
+								
+								<div class="input-field col s12 m3 l3 validate">
+									<label for="titulo">Título de Eleitor</label>
+									<input id="titulo" type="text" th:field="*{tituloEleitor}" class="js-titulo" />
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="input-field col s12 m4 l4 validate">
+									<label for="tel-fixo">Tel. Fixo</label>
+									<input id="tel-fixo" type="text" th:field="*{telefoneFixo}"  class="js-telefone" />
+								</div>
+								
+								<div class="input-field col s12 m4 l4 validate">
+									<label for="celular-um">Celular 1</label>
+									<input id="celular-um" type="text" th:field="*{celularPrincipal}"  class="js-telefone" th:errorclass="invalid" />
+								</div>
+								
+								<div class="input-field col s12 m4 l4 validate">
+									<label for="celular-dois">Celular 2</label>
+									<input id="celular-dois" type="text" th:field="*{celularSecundario}"  class="js-telefone" />
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="input-field col s12 m4 l4 validate">
+									<cmp:required label="Data de Nasc." for="data-nasc" />
+									<input id="data-nasc" type="text" class="datepicker js-data" th:field="*{dataNascimento}" th:errorclass="invalid" data-uk-datepicker="{format:'DD/MM/YYYY'}" />
+								</div>
+								
+								<div class="input-field col s12 m8 l8 validate">
+									<label for="email">E-mail</label>
+									<input id="email" type="email" th:field="*{email}" th:errorclass="invalid" />
+								</div>
+							</div>
+							
+							<div class="card-action row">
+								<div class="col s12 m2 l2 right">
+									<input type="submit" value="Salvar" class="btn btn-cadastrar" />
+								</div>
+								
+								<div class="col s12 m2 l2 right">
+									<a th:href="@{/clientes}" class="btn">Pesquisar</a>
+								</div>
+							</div>
+						
+						</div>
+						<!-- FIM CAMPOS -->
+							
+					</form>
+					<!-- FIM FORMULÁRIO -->				
+			</section>
+			
+			<th:block layout:fragment="javascript-extra">
+				<script th:src="@{/js/combo.estado-cidade.js}"></script>
+				<!--
+				<script type="text/javascript" th:src="@{/uikit-2.27.4/js/uikit.min.js}"></script>
+				<script type="text/javascript" th:src="@{/uikit-2.27.4/js/components/datepicker.js}"></script>
+				-->
+			</th:block>
+	  </body>  
+</html>
+

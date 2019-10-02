@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:cmp="http://www.advocacia.com.br"
+	layout:decorate="~{layout/base}"
+	th:with="currentPage='contaReceber'">
+	  
+	  <head>
+	  	<title>Cadastro de Honorários</title>
+	  	<!--
+	  	<link rel="stylesheet" type="text/css" th:href="@{/uikit-2.27.4/css/uikit.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/uikit-2.27.4/css/components/datepicker.min.css}" />
+		-->
+	  </head>
+	  
+	  <body>
+	  	<section layout:fragment="conteudo">
+			<cmp:navegacao url="@{/contasReceber}" texto="Honorários" />
+			
+			<form class="card" method="POST" th:action="@{/contasReceber}" th:object="${contaReceber}">
+				<cmp:message />
+				
+				<input type="hidden" th:field="*{codigo}" />
+				
+				<cmp:titulo texto="Honorários" />
+				
+				<div class="card-content">
+					<div class="row">
+						<div class="input-field col s12 m4 l4">			
+							<select th:field="*{cliente}" id="cliente" th:errorclass="invalid">
+								<option value="">SELECIONE O DEVEDOR</option>
+								<option th:each="cliente : ${clientes}" th:value="${cliente.codigo}" th:text="${cliente.nome}"></option>
+							</select>
+							<cmp:required label="Cliente" for="cliente" />				
+						</div>
+						
+						<div class="input-field col s12 m4 l4">
+							<input id="descricao" type="text" class="validate" th:field="*{descricao}" th:errorclass="invalid" />
+							<cmp:required label="Descrição" for="descricao" />
+						</div>
+						
+						<div class="input-field col s12 m4 l4">			
+							<select th:field="*{status}" id="status" th:errorclass="invalid">
+								<option value="">SELECIONE O STATUS</option>
+								<option th:each="status : ${status}" th:value="${status}" th:text="${status.descricao}"></option>
+							</select>
+							<cmp:required label="Status" for="status" />				
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="input-field col s12 m4 l4">
+							<select th:field="*{numeroProcesso}" id="numeroProcesso">
+								<option value="">SELECIONE O NÚMERO DO PROCESSO</option>
+								<option th:each="processo : ${processos}" th:value="${processo.numeroProcesso}" th:text="${processo.numeroProcesso}"></option>
+							</select>
+							<cmp:required label="Número do Processo" for="numeroProcesso" />
+						</div>
+						<!--				
+						<div class="input-field col s12 m4 l4">
+							<input id="numeroProcesso" type="text" class="validate js-processo" th:field="*{numeroProcesso}" th:errorclass="invalid" />
+							<cmp:required label="Número do processo" for="numeroProcesso" />
+						</div>
+						-->
+						<div class="input-field col s12 m4 l4">
+							<input id="dataVencimento" type="text" class="datepicker js-data" th:field="*{dataVencimento}" th:errorclass="invalid" data-uk-datepicker="{format:'DD/MM/YYYY'}" />
+							<cmp:required label="Data de vencimento" for="dataVencimento" />
+						</div>
+						
+						<div class="input-field col s12 m4 l4">
+							<input id="valor" type="text" class="js-moeda" th:field="*{valor}" th:errorclass="invalid" />
+							<cmp:required label="Valor (R$)" for="valor" />
+						</div>
+					</div>
+					
+					<div class="card-action right-align">
+						<a th:href="@{/contasReceber}" class="btn waves-effect white-text ed-button">Pesquisar</a>
+						<button type="submit" class="btn waves-effect white-text ed-button">Salvar</button>
+					</div>
+				</div>	
+			</form>
+		</section>
+		<!--
+		<th:block layout:fragment="javascript-extra">
+			<script type="text/javascript" th:src="@{/uikit-2.27.4/js/uikit.min.js}"></script>
+			<script type="text/javascript" th:src="@{/uikit-2.27.4/js/components/datepicker.js}"></script>
+		</th:block>
+		-->
+	  </body>  
+</html>

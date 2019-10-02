@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:cmp="http://www.advocacia.com.br"
+	layout:decorate="~{layout/base}"
+	th:with="currentPage='usuario'">
+	
+	<head>
+		<title>Cadastro de Usuário</title>
+	</head>
+	
+	<body>	
+		<section layout:fragment="conteudo" >	
+			<cmp:navegacao url="@{/usuarios}" texto="usuario" />
+			
+			<form class="card" method="POST" th:action="@{/usuarios}" th:object="${usuario}" >		
+				<cmp:message />
+					
+				<cmp:titulo texto="usuario" />
+				
+				<input type="hidden" th:field="*{codigo}" />
+				
+				<div class="card-content" >					
+					<!-- Nome | Email -->
+					<div class="row">									
+						<div class="input-field col s12 m6 l6" >
+							<input id="nome" type="text" class="validate" th:field="*{nome}" />
+							<cmp:required label="Nome" for="nome" />
+						</div>
+						
+						<div class="input-field col s12 m6 l6" >
+							<input id="email" type="text" class="validate" th:field="*{email}" />
+							<cmp:required label="E-mail" for="email" />
+						</div>			
+					</div>
+					
+					<!-- Senha | Grupo -->
+					<div class="row" >			
+						<div class="input-field col s12 m6 l6" >
+							<input id="senha" type="password" class="validate" th:field="*{senha}" />
+							<cmp:required label="Senha" for="senha" />
+						</div>
+						
+						<div class="input-field col s12 m6 l6" >
+							
+							<select id="grupo" th:field="*{grupo}" >
+								<option value="" >Selecione um grupo</option>
+								<option th:each="grupo : ${grupos}" th:value="${grupo.codigo}" th:text="${grupo.nome}"></option>
+							</select>
+							<cmp:required label="Grupo" for="grupo" />							
+							
+						</div>			
+					</div>
+					
+					<div class="card-action right-align" >
+						<button type="submit" class="btn waves-effect white-text ed-button">Salvar</button>
+					</div>				
+				</div>			
+			</form>						
+		</section>
+	</body>
+</html>

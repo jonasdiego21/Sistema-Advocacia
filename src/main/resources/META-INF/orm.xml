@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd"
+	version="2.1">
+	
+	<named-native-query name="Advocacia.totalProcessosPorStatus" result-set-mapping="totalProcessosPorStatusMapping">
+		<query>
+			SELECT 
+				status, COUNT(*) total
+			FROM
+				Processo
+			WHERE
+				status = :status
+			GROUP BY status
+		</query>
+	</named-native-query>
+	
+	<named-native-query name="Advocacia.totalDespesasNoAno" result-set-mapping="totalDespesasNoAnoMapping">
+		<query>
+			SELECT 
+			    YEAR(data_vencimento) ano, SUM(valor_total) total
+			FROM
+			    conta_pagar
+			WHERE
+			    YEAR(data_vencimento) = YEAR(NOW())
+			GROUP BY ano
+			ORDER BY ano DESC
+		</query>
+	</named-native-query>
+	
+	<named-native-query name="Advocacia.totalDespesasNoMes" result-set-mapping="totalDespesasNoMesMapping">
+		<query>
+			SELECT 
+			    DATE_FORMAT(data_vencimento, '%Y/%m') mes, SUM(valor_total) total
+			FROM
+			    conta_pagar
+			WHERE
+			    data_vencimento > DATE_SUB(NOW(), INTERVAL 12 MONTH) 
+			        AND status = 'DEVENDO'
+			GROUP BY DATE_FORMAT(data_vencimento, '%Y/%m')
+			ORDER BY DATE_FORMAT(data_vencimento, '%Y/%m') DESC
+		</query>
+	</named-native-query>
+	
+	<named-native-query name="Advocacia.totalReceitasNoAno" result-set-mapping="totalReceitasNoAnoMapping">
+		<query>
+			SELECT 
+			    YEAR(data_vencimento) ano, SUM(valor) total
+			FROM
+			    conta_receber
+			WHERE
+			    YEAR(data_vencimento) = YEAR(NOW())
+			GROUP BY ano
+			ORDER BY ano DESC
+		</query>
+	</named-native-query>
+	
+	<named-native-query name="Advocacia.totalReceitasNoMes" result-set-mapping="totalReceitasNoMesMapping">
+		<query>
+			SELECT 
+			    DATE_FORMAT(data_vencimento, '%Y/%m') mes, SUM(valor) total
+			FROM
+			    conta_receber
+			WHERE
+			    data_vencimento > DATE_SUB(NOW(), INTERVAL 12 MONTH) 
+			        AND status = 'DEVENDO'
+			GROUP BY DATE_FORMAT(data_vencimento, '%Y/%m')
+			ORDER BY DATE_FORMAT(data_vencimento, '%Y/%m') DESC
+		</query>
+	</named-native-query>
+	
+	<sql-result-set-mapping name="totalProcessosPorStatusMapping">	
+		<constructor-result target-class="br.com.jdrmservices.araujocafe.dto.TotalProcessosPorStatus">
+			<column name="status" class="java.lang.String" />
+			<column name="total" class="java.lang.Integer" />
+		</constructor-result>	
+	</sql-result-set-mapping>
+	
+	<sql-result-set-mapping name="totalDespesasNoAnoMapping">	
+		<constructor-result target-class="br.com.jdrmservices.araujocafe.dto.TotalDespesasNoAno">
+			<column name="ano" class="java.lang.String" />
+			<column name="total" class="java.math.BigDecimal" />
+		</constructor-result>	
+	</sql-result-set-mapping>
+
+	<sql-result-set-mapping name="totalDespesasNoMesMapping">	
+		<constructor-result target-class="br.com.jdrmservices.araujocafe.dto.TotalDespesasNoMes">
+			<column name="mes" class="java.lang.String" />
+			<column name="total" class="java.math.BigDecimal" />
+		</constructor-result>	
+	</sql-result-set-mapping>
+	
+	<sql-result-set-mapping name="totalReceitasNoAnoMapping">	
+		<constructor-result target-class="br.com.jdrmservices.araujocafe.dto.TotalReceitasNoAno">
+			<column name="ano" class="java.lang.String" />
+			<column name="total" class="java.math.BigDecimal" />
+		</constructor-result>	
+	</sql-result-set-mapping>
+
+	<sql-result-set-mapping name="totalReceitasNoMesMapping">	
+		<constructor-result target-class="br.com.jdrmservices.araujocafe.dto.TotalReceitasNoMes">
+			<column name="mes" class="java.lang.String" />
+			<column name="total" class="java.math.BigDecimal" />
+		</constructor-result>	
+	</sql-result-set-mapping>
+
+</entity-mappings>

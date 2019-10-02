@@ -1,0 +1,25 @@
+INSERT INTO permissao (codigo, nome) VALUES (1, 'ROLE_CADASTRO_CONTA_PAGAR');
+INSERT INTO permissao (codigo, nome) VALUES (2, 'ROLE_CADASTRO_CONTA_RECEBER');
+INSERT INTO permissao (codigo, nome) VALUES (3, 'ROLE_CADASTRO_PROCESSO');
+INSERT INTO permissao (codigo, nome) VALUES (4, 'ROLE_CADASTRO_CLIENTE');
+INSERT INTO permissao (codigo, nome) VALUES (5, 'ROLE_CADASTRO_USUARIO');
+
+INSERT INTO permissao (codigo, nome) VALUES (6, 'ROLE_EDICAO_CONTA_PAGAR');
+INSERT INTO permissao (codigo, nome) VALUES (7, 'ROLE_EDICAO_CONTA_RECEBER');
+INSERT INTO permissao (codigo, nome) VALUES (8, 'ROLE_EDICAO_PROCESSO');
+INSERT INTO permissao (codigo, nome) VALUES (9, 'ROLE_EDICAO_CLIENTE');
+INSERT INTO permissao (codigo, nome) VALUES (10, 'ROLE_EDICAO_USUARIO');
+
+INSERT INTO permissao (codigo, nome) VALUES (11, 'ROLE_VISUALIZACAO_CONTA_PAGAR');
+INSERT INTO permissao (codigo, nome) VALUES (12, 'ROLE_VISUALIZACAO_CONTA_RECEBER');
+INSERT INTO permissao (codigo, nome) VALUES (13, 'ROLE_VISUALIZACAO_PROCESSO');
+INSERT INTO permissao (codigo, nome) VALUES (14, 'ROLE_VISUALIZACAO_CLIENTE');
+INSERT INTO permissao (codigo, nome) VALUES (15, 'ROLE_VISUALIZACAO_USUARIO');
+
+INSERT INTO permissao (codigo, nome) VALUES (16, 'ROLE_EXCLUSAO_CONTA_PAGAR');
+INSERT INTO permissao (codigo, nome) VALUES (17, 'ROLE_EXCLUSAO_CONTA_RECEBER');
+INSERT INTO permissao (codigo, nome) VALUES (18, 'ROLE_EXCLUSAO_PROCESSO');
+INSERT INTO permissao (codigo, nome) VALUES (19, 'ROLE_EXCLUSAO_CLIENTE');
+INSERT INTO permissao (codigo, nome) VALUES (20, 'ROLE_EXCLUSAO_USUARIO');
+
+INSERT INTO permissao (codigo, nome) VALUES (21, 'ROLE_ADMINISTRADOR');

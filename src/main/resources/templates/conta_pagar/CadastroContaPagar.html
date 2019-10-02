@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:cmp="http://www.advocacia.com.br"
+	layout:decorate="~{layout/base}"
+	th:with="currentPage='contaPagar'">
+	  
+	  <head>
+	  	<title>Cadastro de Despesas</title>
+	  	<!--
+	  	<link rel="stylesheet" type="text/css" th:href="@{/uikit-2.27.4/css/uikit.min.css}" />
+		<link rel="stylesheet" type="text/css" th:href="@{/uikit-2.27.4/css/components/datepicker.min.css}" />
+		-->
+	  </head>
+	  
+	  <body>
+	  	<section layout:fragment="conteudo">
+			<cmp:navegacao url="@{/contasPagar}" texto="Despesa" />
+			
+			<form class="card" method="POST" th:action="@{/contasPagar}" th:object="${contaPagar}">
+				<cmp:message />
+				
+				<input type="hidden" th:field="*{codigo}" />
+				
+				<cmp:titulo texto="Despesa" />
+				
+				<div class="card-content">
+					<div class="row">
+						<div class="input-field col s12 m6 l6">
+							<input id="fornecedor" type="text" class="validate" th:field="*{fornecedor}" />
+							<cmp:required label="Fornecedor do serviço" for="fornecedor" />
+						</div>
+						
+						<div class="input-field col s12 m6 l6">
+							<input id="descricao" type="text" class="validate" th:field="*{descricao}" />
+							<cmp:required label="Descrição" for="descricao" />
+						</div>
+					</div>
+					
+					<div class="row">						
+						<div class="input-field col s12 m4 l4">
+							<input id="dataVencimento" type="text" class="datepicker js-data" th:field="*{dataVencimento}" data-uk-datepicker="{format:'DD/MM/YYYY'}" />
+							<cmp:required label="Data de vencimento" for="dataVencimento" />
+						</div>
+						
+						<div class="input-field col s12 m4 l4">
+							<input id="valorTotal" type="text" class="js-moeda" th:field="*{valorTotal}" />
+							<cmp:required label="Valor (R$)" for="valorTotal" />
+						</div>
+						
+						<div class="input-field col s12 m4 l4">			
+							<select th:field="*{status}" id="status" th:errorclass="invalid">
+								<option value="">SELECIONE O STATUS</option>
+								<option th:each="status : ${status}" th:value="${status}" th:text="${status.descricao}"></option>
+							</select>
+							<cmp:required label="Status" for="status" />				
+						</div>
+					</div>
+					
+					<div class="card-action right-align">
+						<a th:href="@{/contasPagar}" class="btn waves-effect white-text ed-button">Pesquisar</a>
+						<button type="submit" class="btn waves-effect white-text ed-button">Salvar</button>
+					</div>
+				</div>	
+			</form>
+		</section>
+		<!--
+		<th:block layout:fragment="javascript-extra">
+			<script type="text/javascript" th:src="@{/uikit-2.27.4/js/uikit.min.js}"></script>
+			<script type="text/javascript" th:src="@{/uikit-2.27.4/js/components/datepicker.js}"></script>
+		</th:block>
+		-->
+	  </body>  
+</html>

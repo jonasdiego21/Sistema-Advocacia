@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:cmp="http://www.advocacia.com.br"
+	layout:decorate="~{layout/base}"
+	th:with="currentPage='contaReceberLancamento'">
+	
+	<head>
+		<title></title>
+	</head>
+		
+	<body>
+		<section layout:fragment="conteudo">
+			<cmp:navegacao url="@{/contasReceberLancamento}" texto="Lançamentos de Honorários" />
+			
+			<form class="card" method="POST" th:action="@{/contasReceberLancamento}" th:object="${contaReceberLancamento}">
+				<cmp:message />
+					
+				<input type="hidden" th:field="*{codigo}" />
+					
+				<cmp:titulo texto="Lançamentos de Honorários" />
+					
+				<div class="card-content">
+					<div class="row">
+						<div class="input-field col s12 m4 l4">
+							<select th:field="*{contaReceberCodigo}">
+								<option value="">SELECIONE O HONORÁRIO</option>
+								<option th:each="contaReceber : ${contasReceber}" th:value="${contaReceber.codigo}" th:text="|${contaReceber.codigo} - ${contaReceber.descricao}|"></option>
+							</select>
+							<cmp:required label="Honorário" for="contaReceber" />
+						</div>
+						
+						<div class="input-field col s12 m4 l4">
+							<input id="data" type="text" class="datepicker js-data" th:field="*{dataRecebimento}" data-uk-datepicker="{format:'DD/MM/YYYY'}" />
+						</div>
+						
+						<div class="input-field col s12 m4 l4">
+							<input id="valorRecebido" type="text" class="js-moeda" th:field="*{valorRecebido}" />
+							<cmp:required label="Valor recebido" for="valorRecebido" />
+						</div>
+					</div>
+					
+					<div class="card-action right-align">
+						<button type="submit" class="btn waves-effect white-text ed-button green">Confirmar Recebimento</button>
+					</div>
+				</div>	
+			</form>	
+		</section>
+	</body>
+</html>

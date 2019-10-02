@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+	<th:block th:fragment="paginacao (pagina)">
+		<ul th:unless="${pagina.vazia}" class="pagination center-align" th:with="paginaAtual=${pagina.atual}" style="padding-bottom: 10px;">
+			<li class="waves-effect" th:classappend="${pagina.primeira} ? disabled">
+				<a th:href="|?page=${paginaAtual - 1}|" th:remove="${pagina.primeira} ? tag">
+					<i class="material-icons">chevron_left</i>
+				</a>
+			</li>
+			
+			<th:block th:each="page : ${#numbers.sequence(1, pagina.total)}" th:with="numeroPagina=${page - 1}">
+				<li class="waves-effect" th:classappend="${paginaAtual == numeroPagina} ? active">
+					<a th:href="${pagina.urlParaPagina(numeroPagina)}" th:text="${page}"></a>
+				</li>	
+			</th:block>
+			
+			<li class="waves-effect" th:classappend="${pagina.ultima} ? disabled">
+				<a th:href="|?page=${paginaAtual + 1}|" th:remove="${pagina.ultima} ? tag">
+					<i class="material-icons">chevron_right</i>
+				</a>
+			</li>	
+		</ul>	
+	</th:block>	
+</html>

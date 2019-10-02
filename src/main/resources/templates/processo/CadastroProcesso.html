@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:data="http://www.thymeleaf.org/extras/data"
+	xmlns:cmp="http://www.advocacia.com.br"
+	layout:decorate="~{layout/base}"
+	th:with="currentPage='processo'">
+	  
+	  <head>
+	  	<title>Cadastro Processo</title>
+		<link rel="stylesheet" type="text/css" th:href="@{/uikit-2.27.4/css/components/upload.min.css}" />
+	  </head>
+	  
+	  <body>
+	  	<section layout:fragment="conteudo"  id="topo">
+			<cmp:navegacao url="@{/processos}" texto="Processo" />
+				<form method="POST" th:action="@{/processos}" th:object="${processo}">
+		
+					<!-- mensagem de erro ou sucesso -->
+					<cmp:message />
+					
+					<!-- codigo do processo -->
+					<input type="hidden" th:field="*{codigo}" />
+	
+						<!-- INICIO CAMPOS -->
+						<div class="card white">
+							<cmp:titulo texto="Processo" />	
+							
+							<!-- informações do processo -->
+							<div class="card-content row">
+								<h6 class="card-title">&#10150; Informações do Processo</h6>
+							
+								<div class="input-field col s12 m3 l3 validate">
+									<cmp:required label="numeroProcesso" for="numeroProcesso" />
+									<input id="numeroProcesso" type="text" th:field="*{numeroProcesso}" class="js-processo" th:errorclass="invalid" />
+								</div>
+								
+								<div class="input-field col s12 m2 l2 validate">
+									<label for="dataCadastro">Data Cadastro</label>
+									<input id="dataCadastro" type="text" class="datepicker js-data" th:field="*{dataCadastro}" th:errorclass="invalid" data-uk-datepicker="{format:'DD/MM/YYYY'}" />
+								</div>
+								
+								<div class="input-field col s12 m7 l7">			
+									<select th:field="*{cliente}" id="cliente">
+										<option value="">SELECIONE O CLIENTE</option>
+										<option th:each="cliente : ${clientes}" th:value="${cliente.codigo}" th:text="${cliente.nome}"></option>
+									</select>
+									<cmp:required label="Cliente" for="cliente" />				
+								</div>
+							</div>
+						</div>
+						
+						<!-- juizo de tramitacao -->
+						<div class="card white">		
+							<div class="card-content row">
+								<h6 class="card-title">&#10150; Juízo de tramitação</h6>
+								
+								<div class="input-field col s12 m3 l3">			
+									<select th:field="*{foro}" id="foro">
+										<option value="">SELECIONE O FORO</option>
+										<option th:each="foro : ${foros}" th:value="${foro}" th:text="${foro.descricao}"></option>
+									</select>
+									<cmp:required label="Foro" for="foro" />				
+								</div>
+								
+								<!-- Estado -->
+								<div class="input-field col s12 m3 l3">			
+									<select th:field="*{estadoTramitacao}" id="estadoTramitacao">
+										<option value="">SELECIONE O ESTADO</option>
+										<option th:each="estado : ${estados}" th:value="${estado.codigo}" th:text="${estado.nome}"></option>
+									</select>
+									<cmp:required label="Estado" for="estadoTramitacao" />				
+								</div>
+								
+								<!-- Cidade -->							
+								<div class="input-field col s12 m3 l3" id="ltc-container-municipio-tramitacao">							
+									<select th:field="*{cidadeTramitacao}" data:url="@{/cidades}" id="cidadeTramitacao" disabled="disabled">
+										<option value="">SELECIONE A CIDADE</option>
+									</select>
+									<cmp:required label="Cidade" for="cidadeTramitacao" />							
+								</div>
+									
+								<cmp:loader id="lct-preloader-municipio-tramitacao" />
+								
+								<div class="input-field col s12 m3 l3">			
+									<select th:field="*{vara}" id="foro">
+										<option value="">SELECIONE A VARA</option>
+										<option th:each="vara : ${varas}" th:value="${vara}" th:text="${vara.descricao}"></option>
+									</select>
+									<cmp:required label="Vara" for="vara" />				
+								</div>
+							</div>
+						</div>
+						
+						<!-- identificação da pasta -->
+						<div class="card white">		
+							<div class="card-content row">
+								<h6 class="card-title">&#10150; Identificação da Pasta</h6>
+							
+								<div class="input-field col s12 m4 l4 validate">
+									<cmp:required label="Tombo" for="tombo" />
+									<input id="tombo" type="text" th:field="*{tombo}" class="js-tombo" th:errorclass="invalid" />
+								</div>
+								
+								<div class="input-field col s12 m4 l4 validate">
+									<cmp:required label="Cor da Pasta" for="corPasta" />
+									<input id="corPasta" type="text" th:field="*{corPasta}" th:errorclass="invalid" />
+								</div>
+								
+								<div class="input-field col s12 m4 l4">			
+									<select th:field="*{naturezaAcao}" id="naturezaAcao">
+										<option value="">SELECIONE A NATUREZA DA AÇÃO</option>
+										<option th:each="naturezaAcao : ${naturezaAcao}" th:value="${naturezaAcao}" th:text="${naturezaAcao.descricao}"></option>
+									</select>
+									<cmp:required label="Natureza da ação" for="naturezaAcao" />				
+								</div>
+							</div>
+						</div>
+						
+						<!-- parte contrária -->
+						<div class="card white">							
+							<div class="card-content">
+								<h6 class="card-title">&#10150; Parte Contrária</h6>
+							
+								<div class="row">
+									<div class="input-field col s12 m6 l6 validate">
+										<cmp:required label="Nome" for="nomeParteContraria" />
+										<input id="nomeParteContraria" type="text" th:field="*{nomeParteContraria}" th:errorclass="invalid" />
+									</div>
+									
+									<div class="input-field col s12 m3 l3 validate">
+										<label for="rgParteContraria">RG</label>
+										<input id="rgParteContraria" type="text" th:field="*{rgParteContraria}" class="js-rg" th:errorclass="invalid" />
+									</div>
+									
+									<div class="input-field col s12 m3 l3 validate">
+										<label for="cpfParteContraria">CPF</label>
+										<input id="cpfParteContraria" type="text" th:field="*{cpfParteContraria}" class="js-cpf" th:errorclass="invalid" />
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="input-field col s12 m3 l3 validate">
+										<cmp:required label="CEP" for="cepParteContraria" />
+										<input id="cepParteContraria" type="text" th:field="*{cepParteContraria}" class="js-cep" th:errorclass="invalid" />
+									</div>
+									
+									<!-- Estado -->
+									<div class="input-field col s12 m3 l3">			
+										<select th:field="*{estadoParteContraria}" id="estado">
+											<option value="" >SELECIONE O ESTADO</option>
+											<option th:each="estado : ${estados}" th:value="${estado.codigo}" th:text="${estado.nome}"></option>
+										</select>
+										<cmp:required label="Estado" for="estado" />				
+									</div>
+									
+									<!-- Cidade -->							
+									<div class="input-field col s12 m6 l6" id="ltc-container-municipio">							
+										<select th:field="*{cidadeParteContraria}" data:url="@{/cidades}" id="cidade" disabled="disabled">
+											<option value="">SELECIONE A CIDADE</option>
+										</select>
+										<cmp:required label="Cidade" for="cidade" />							
+									</div>
+									
+									<cmp:loader id="lct-preloader-municipio" />
+								</div>
+								
+								<div class="row">
+									<div class="input-field col s12 m6 l6 validate">
+										<label for="logradouroParteContraria">Logradouro</label>
+										<input id="logradouroParteContraria" type="text" th:field="*{logradouroParteContraria}" th:errorclass="invalid" />
+									</div>
+									
+									<div class="input-field col s12 m4 l4 validate">
+										<label for="bairroParteContraria">Bairro</label>
+										<input id="bairroParteContraria" type="text" th:field="*{bairroParteContraria}" th:errorclass="invalid" />
+									</div>
+									
+									<div class="input-field col s12 m2 l2 validate">
+										<label for="numeroParteContraria">Número</label>
+										<input id="numeroParteContraria" type="text" class="js-numero" th:field="*{numeroParteContraria}" th:errorclass="invalid" />
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="input-field col s12 m4 l4 validate">
+										<label for="profissaoParteContraria">Profissão</label>
+										<input id="profissaoParteContraria" type="text" th:field="*{profissaoParteContraria}" th:errorclass="invalid" />
+									</div>
+									
+									<div class="input-field col s12 m4 l4 validate">
+										<cmp:required label="Tipo da Ação" for="tipoAcao" />
+										<input id="tipoAcao" type="text" th:field="*{tipoAcao}" th:errorclass="invalid" />
+									</div>
+									
+									<div class="input-field col s12 m4 l4 validate">
+										<select th:field="*{status}" id="status">
+											<option value="">SELECIONE O STATUS</option>
+											<option th:each="status : ${status}" th:value="${status}" th:text="${status.descricao}"></option>
+										</select>
+										<cmp:required label="Status" for="status" />
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<!-- documentos apresentadas -->
+						<div class="card white">							
+							<div class="row card-content">
+								<h6 class="card-title">&#10150; Documentos Apresentados - Provas</h6>
+								
+								<div class="input-field col s12 m11 l11">
+									<select th:field="*{documentoApresentado}" multiple>
+										<option value="" disabled selected>Selecione um ou mais documentos</option>
+										<option th:each="documento : ${documentos}" th:value="${documento.codigo}" th:text="${documento.nome}"></option>
+									</select>		   		
+								</div>
+								
+								<div class="input-field col s12 m1 l1">
+									<a class="btn-floating btn-large waves-effect waves-light blue modal-trigger tooltipped" href="#modal3" data-tooltip="ADICIONAR DOCUMENTO" data-position="top">
+										<i class="material-icons">add</i>
+									</a>	   		
+								</div>
+							</div>
+						</div>
+						
+						<div class="card white">							
+							<div class="row card-content">
+								<h6 class="card-title">&#10150; Resumo do Processo</h6>
+								
+								<div class="col s12 m12 l12">
+									<textarea class="editor" th:field="*{resumo}" placeholder="Resumo do processo..."></textarea>		
+								</div>
+							</div>
+						</div>
+						
+						<!-- financeiro -->
+						<div class="card white">
+							<div class="row card-content">
+								<h6 class="card-title">&#10150; Finançeiro</h6>
+								
+								<div class="row center">
+									<!-- despesas do processo -->
+									<div class="card-action col s12 m12 l12 input-field">
+										<h6 class="card-title center">Adicionar Despesa</h6>
+										<a class="btn-floating btn-large waves-effect waves-light red modal-trigger" href="#modal1"><i class="material-icons">add</i></a>
+									</div>
+
+									<div class="row" id="containerDespesa">
+										<th:block th:each="despesa : ${processo.despesas}">
+											<div class="chip">
+												<input type="hidden" name="despesas" th:value="${despesa.codigo}" />
+												<label th:text="|${despesa.descricao} - ${despesa.valor}|" ></label>
+												<i class="close material-icons tooltipped" data-tooltip="EXCLUIR DESPESA" data-position="bottom">close</i>
+											</div>
+										</th:block>									
+						    		</div>		
+									
+									<!-- honorários do processo --
+									<div class="card-action col s12 m12 l12 input-field">
+										<h6 class="card-title center">Adicionar Honorários</h6>
+										<a class="btn-floating btn-large waves-effect waves-light green modal-trigger" href="#modal2"><i class="material-icons">add</i></a>
+									</div>
+									-->
+								</div>
+							</div>								
+						</div>
+						
+						<!-- MODAL DOCUMENTO APRESENTADO -->
+						<div id="modal3" class="card white modal">
+							<cmp:titulo texto="Documento" />	
+							
+							<div class="card-content row modal-content">
+								<div class="input-field col s12 m12 l12 validate">
+									<cmp:required label="Titulo do documento" for="documentoApresentado" />
+									<input id="documentoApresentado" type="text" />
+								</div>
+							</div>
+							
+							<div class="modal-footer">
+						      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+						      <a href="#!" id="btnAdicionarHonorario" class="modal-action modal-close waves-effect waves-green btn-flat green white-text">Adicionar</a>
+						    </div>
+						</div>
+						
+						<!-- MODAL RECEITA -->
+						<!--
+						<div id="modal2" class="card white modal">
+							<cmp:titulo texto="Honorário" />	
+							
+							<div class="card-content row modal-content">
+							
+							</div>
+							
+							<div class="modal-footer">
+						      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+						      <a href="#!" id="btnAdicionarHonorario" class="modal-action modal-close waves-effect waves-green btn-flat green white-text">Adicionar</a>
+						    </div>
+						</div>
+						-->
+						
+						<div class="card white">
+							<div class="row card-content">
+								<h6 class="card-title">&#10150; Documentos Anexados</h6>
+								
+								<div id="upload-drop" class="card-content col s12 m12 l12 upload">
+									<i class="material-icons">cloud</i>
+									<span>Arraste o documento aqui ou </span>
+									<a href="#" class="upload-form-file">selecione <input id="upload-select" type="file" accept=".jpg, .jpeg, .png, .doc, .docx, .xls, .xlsx, .ppt, .pptx, .avi, .mp3, .mp4, .odt, .ods, .pdf"></a>
+								</div>
+								
+								<div class="row">
+									<div class="col s12 m12 l12">
+										<input type="hidden" id="campoArquivo" />
+										<input type="hidden" id="campoContentType" />
+									</div>
+								</div>
+
+								<!-- arquivos adicionados no upload -->
+								<div class="col s12 m12 l12">
+									<th:block id="containerArquivos"></th:block>	
+								</div>
+							</div>
+
+							<div class="card-action row">
+								<div class="col s12 m2 l2 right">
+									<input type="submit" value="Salvar" class="btn btn-cadastrar" />
+								</div>
+								
+								<div class="col s12 m2 l2 right">
+									<a th:href="@{/processos}" class="btn">Pesquisar</a>
+								</div>
+							</div>
+						</div>
+					</form>
+					<!-- FIM FORMULÁRIO -->	
+					
+					<!-- modal despesas -->
+					<!--<th:block th:replace="/despesa/ModalDespesaDoProcesso :: modalDespesa"></th:block>-->
+					
+					<!-- MODAL DESPESAS -->
+					<div id="modal1" class="card white modal" th:fragment="modalDespesa" data:url="@{/despesas}">
+						<!--<form method="POST" th:action="@{/despesas}">-->
+							<cmp:titulo texto="Despesa" />	
+							
+							<div class="card-content row modal-content">
+								<div class="input-field col s12 m12 l12 validate">
+									<label for="descricao">Descrição</label>
+									<input id="descricao" type="text" />
+								</div>
+								
+								<div class="input-field col s12 m6 l6 validate">
+									<label for="qtde">Qtde</label>
+									<input id="qtde" type="text" />
+								</div>
+								
+								<div class="input-field col s12 m6 l6 validate">
+									<label for="valor">Valor (R$)</label>
+									<input id="valor" type="text" />
+								</div>
+							</div>
+							
+							<div class="modal-footer">
+						      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+						      <!--<input type="submit" id="btnAdicionarDespesa" class="modal-action modal-close waves-effect waves-green btn-flat red white-text" value="Adicionar" />-->
+						      <a href="#!" id="btnAdicionarDespesa" class="modal-action modal-close waves-effect waves-green btn-flat red white-text">Adicionar</a>
+						    </div>
+					    <!--</form>-->
+					</div>
+					
+					<a href="#topo" class="card" id="ir-topo">
+						<i class="material-icons">navigation</i>
+					</a>
+					
+					<!-- modal honorários -->
+					<!--<th:block th:replace="/contaReceber/CadastroContaReceber :: modalHonorario"></th:block>-->							
+			</section>
+
+			<th:block layout:fragment="javascript-extra">
+				<script type="text/javascript" th:src="@{/js/combo.estado-cidade-tramitacao.js}"></script>
+				<script type="text/javascript" th:src="@{/js/combo.estado-cidade.js}"></script>
+				<script type="text/javascript" th:src="@{/uikit-2.27.4/js/components/upload.min.js}"></script>
+				<script type="text/javascript" th:src="@{/js/componente-upload.js}"></script>				
+				<script type="text/javascript" th:src="@{/js/advocacia.documento-apresentado.js}"></script>
+				<script type="text/javascript" th:src="@{/js/despesas-processo.js}"></script>
+			</th:block>
+	  </body>  
+</html>
